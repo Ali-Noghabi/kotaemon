@@ -184,6 +184,11 @@ function print_highlight() {
     echo "******************************************************" && echo ""
 }
 
+function accept_conda_tos() {
+    # Accept Terms of Service for default channels
+    "${conda_root}/bin/conda" tos accept --override-channels --channel defaults
+}
+
 # Main script execution
 
 # move two levels up from the dir where this script resides
@@ -203,6 +208,9 @@ check_path_for_spaces
 
 print_highlight "Setting up Miniconda"
 install_miniconda
+
+print_highlight "Accepting conda tos"
+accept_conda_tos
 
 print_highlight "Creating conda environment"
 create_conda_env "$python_version"
